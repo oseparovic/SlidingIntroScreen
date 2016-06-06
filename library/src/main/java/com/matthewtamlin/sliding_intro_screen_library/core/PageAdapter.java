@@ -14,30 +14,54 @@
  * limitations under the License.
  */
 
-package com.matthewtamlin.sliding_intro_screen_library;
+package com.matthewtamlin.sliding_intro_screen_library.core;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.matthewtamlin.android_utilities_library.collections.ArrayListWithCallbacks;
+import com.matthewtamlin.android_utilities_library.collections.ArrayListWithCallbacks.OnListChangedListener;
 
 /**
- * Adapts a collection of {@link Page} elements so that they can be displayed in an {@link
+ * Adapts a collection of Fragments so that they can be displayed in an {@link
  * android.support.v4.view.ViewPager ViewPager}. Instances of this class automatically listen for
  * changes to the dataset.
  */
-public class PageAdapter extends FragmentPagerAdapter
-		implements ArrayListWithCallbacks.OnListChangedListener {
+public class PageAdapter extends FragmentPagerAdapter {
 	/**
 	 * Used to identify this class during debugging.
 	 */
+	@SuppressWarnings("unused")
 	private static final String TAG = "[PageAdapter]";
 
 	/**
-	 * The dataset of this adapter.
+	 * The dataset of pages to adapt.
 	 */
-	private final ArrayListWithCallbacks<Page> pages;
+	private final ArrayListWithCallbacks<Fragment> pages;
+
+	/**
+	 * Receive list change events from the dataset. Using a delegate hides the internal
+	 * implementation from the public class signature.
+	 */
+	private final OnListChangedListener listChangeListener = new OnListChangedListener() {
+		@Override
+		public void onItemAdded(final ArrayListWithCallbacks list, final Object itemAdded,
+				final int index) {
+			notifyDataSetChanged();
+		}
+
+		@Override
+		public void onItemRemoved(final ArrayListWithCallbacks list, final Object itemRemoved,
+				final int index) {
+			notifyDataSetChanged();
+		}
+
+		@Override
+		public void onListCleared(final ArrayListWithCallbacks list) {
+			notifyDataSetChanged();
+		}
+	};
 
 	/**
 	 * Constructs a new PageAdapter instance.
@@ -45,9 +69,9 @@ public class PageAdapter extends FragmentPagerAdapter
 	 * @param fm
 	 * 		the FragmentManager for the Context this adapter is operating in
 	 * @param pages
-	 * 		the dataset of Page elements to adapt, null for an empty dataset
+	 * 		the dataset of pages to adapt, null for an empty dataset
 	 */
-	public PageAdapter(final FragmentManager fm, final ArrayListWithCallbacks<Page> pages) {
+	public PageAdapter(final FragmentManager fm, final ArrayListWithCallbacks<Fragment> pages) {
 		super(fm);
 
 		if (pages == null) {
@@ -56,15 +80,13 @@ public class PageAdapter extends FragmentPagerAdapter
 			this.pages = pages;
 		}
 
-		this.pages.addOnItemAddedListener(this);
-		this.pages.addOnItemRemovedListener(this);
-		this.pages.addOnListClearedListener(this);
+		this.pages.addOnListChangedListener(listChangeListener);
 	}
 
 	/**
 	 * @return the dataset of this adapter, not null
 	 */
-	public ArrayListWithCallbacks<Page> getPages() {
+	public ArrayListWithCallbacks<Fragment> getPages() {
 		return pages;
 	}
 
@@ -76,22 +98,5 @@ public class PageAdapter extends FragmentPagerAdapter
 	@Override
 	public int getCount() {
 		return pages.size();
-	}
-
-	@Override
-	public void onItemAdded(final ArrayListWithCallbacks list, final Object itemAdded,
-			final int index) {
-		notifyDataSetChanged();
-	}
-
-	@Override
-	public void onItemRemoved(final ArrayListWithCallbacks list, final Object itemRemoved,
-			final int index) {
-		notifyDataSetChanged();
-	}
-
-	@Override
-	public void onListCleared(final ArrayListWithCallbacks list) {
-		notifyDataSetChanged();
 	}
 }

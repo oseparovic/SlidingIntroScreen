@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.matthewtamlin.sliding_intro_screen_library;
+package com.matthewtamlin.sliding_intro_screen_library.transformers;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.matthewtamlin.sliding_intro_screen_library.R;
 
 import java.util.HashMap;
 
@@ -35,6 +37,7 @@ public final class ParallaxTransformer implements ViewPager.PageTransformer {
 	/**
 	 * Used to identify this class during debugging.
 	 */
+	@SuppressWarnings("unused")
 	private static final String TAG = "[ParallaxTransformer]";
 
 	/**
@@ -53,7 +56,7 @@ public final class ParallaxTransformer implements ViewPager.PageTransformer {
 		if (pageIsSelected) {
 			pageRootView.invalidate();
 		} else if (pageIsScrolling) {
-			//TODO clarify how this scale works
+			// This value creates a parallax effect
 			final float n = 0.5f;
 
 			// Transform front image holder
