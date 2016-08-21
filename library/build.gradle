@@ -3,19 +3,18 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'com.matthew-tamlin'
     PUBLISH_ARTIFACT_ID = 'sliding-intro-screen'
-    PUBLISH_VERSION = '3.1.0'
+    PUBLISH_VERSION = '3.2.0'
 }
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         minSdkVersion 11
-        targetSdkVersion 24
-        versionCode 11
-        versionName "3.1.0"
+        targetSdkVersion 23
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -26,12 +25,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.matthew-tamlin:android-utilities:1.3.1'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.matthew-tamlin:android-utilities:2.1.0'
 
     testCompile 'org.hamcrest:hamcrest-library:1.3'
     testCompile 'org.robolectric:robolectric:3.0'
 }
 
 // execute '[gradlew.bat OR .gradlew] clean build generateRelease' to build release
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
+apply from: 'buildRelease.gradle'
