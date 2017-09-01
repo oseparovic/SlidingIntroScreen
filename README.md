@@ -3,8 +3,14 @@ Your app should have a beginning which welcomes the user and makes them want to 
 
 <img src="https://raw.githubusercontent.com/MatthewTamlin/SlidingIntroScreen/master/artwork/mr-d-food-example.gif" width="425"/> <img src="https://raw.githubusercontent.com/MatthewTamlin/SlidingIntroScreen/master/artwork/dots-example.gif" width="425"/> 
 
-## Download
-Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:sliding-intro-screen:3.2.0'` to your gradle build file to use the latest version. Older versions are available in the [maven repo](https://bintray.com/matthewtamlin/maven/SlidingIntroScreen/view).
+## Dependency
+Releases are made available through jCentre.
+
+    dependencies {
+        compile 'com.matthew-tamlin:sliding-intro-screen:3.2.0'
+    }
+    
+Older versions are available in the [maven repo](https://bintray.com/matthewtamlin/maven/SlidingIntroScreen/view).
 
 ## Quick-start
 [IntroActivity](library/src/main/java/com/matthewtamlin/sliding_intro_screen_library/core/IntroActivity.java) is the primary class of this library because it coordinates and displays all the other components. The activity coordinates two main components: a standard Android ViewPager and a custom navigation bar. The view pager hosts several pages which in turn display the content of the introduction screen. The navigation bar displays the user's progress through the introduction, and provides three buttons for navigation. The left and right buttons are shown on all but the last page, and the final button is shown on only the last page. 
@@ -21,7 +27,7 @@ The other methods of the IntroActivity class provide further customisation optio
 - Getting references to the pages.
 - Toggling the visibility of the buttons.
 
-The Javadoc of the IntroActivity class contains further information, and the [example app](exampleapp/src/main/java/com/matthewtamlin/exampleapp/ExampleActivity.java) demonstrates how the class can be used in practice.
+The Javadoc of the IntroActivity class contains further information, and the [example app](example%20app/src/main/java/com/matthewtamlin/sliding_intro_screen_example_app/DotsActivity.java) demonstrates how the class can be used in practice.
 
 ## Other Components
 The other notable components of this library are:
